@@ -5,6 +5,7 @@ var Lancamento = require('../dataaccess/models/Lancamento');
 module.exports = function(app) {
     //Buscar todos os lançamentos
     app.get('/api/lancamentos', function(req, res){
+        console.log('Buscando todos os lançamentos...');
         Lancamento.find(function(err, lancamentos){
             if(err) {
                 console.log('Erro ao buscar registros.');    
@@ -15,9 +16,23 @@ module.exports = function(app) {
         });
     }); 
     
+    //Buscar lançamento por id
+    app.get('/api/lancamentos/:id', function(req, res){
+        console.log('Id pesquisado:' + req.params.id);
+        Lancamento.findById(req.params.id, function(err, lancamento){
+            if(err) {
+                console.log('Erro ao buscar registro: ' + req.params.id);    
+                res.send(err);
+            }
+        
+            res.json(lancamento);
+        });
+    }); 
+    
     //Criar novo lançamento
     app.post('/api/lancamentos', function(req, res){
         console.log('Tentando criar um novo registro...');
+        console.log(req.body);
         Lancamento.create({
             titulo: req.body.titulo,
             data: req.body.data,
@@ -25,6 +40,7 @@ module.exports = function(app) {
         }, function(err, lancamento){
             if(err) {
                 console.log('Erro ao criar registro.');    
+                console.log(err);    
                 res.send(err);
             }
             

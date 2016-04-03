@@ -23,10 +23,25 @@
         
         <!--Scripts aplicação-->
         <script src="app/script.js"></script>
+        
+        <!--Controllers-->
         <script src="app/controllers/lancamentos.js"></script>
+        
+        <!--Services-->
+        <script src="app/services/apiConnect.js"></script>
     </head>
     <body ng-app="appLancamentos">
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#/">Lançamentos</a>
+                <ul class="nav navbar-nav">
+                    <li><a href="#/lancamentos/cadastrar">Cadastrar</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container">
             <div ng-view></div>
+        </div>
     </body>
 </html>
 
